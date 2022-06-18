@@ -1,7 +1,11 @@
 <?php
 
+namespace Database\Seeders;
+
+use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use App\Level;
+use Illuminate\Support\Facades\DB;
+use App\Models\Level;
 
 
 class LevelSeeder extends Seeder
@@ -14,19 +18,19 @@ class LevelSeeder extends Seeder
     
     public function run()
     {
-        Level::create([
+        DB::table('levels')->insert([
             'name'=>'初心者',
         ]);
-        Level::create([
+        DB::table('levels')->insert([
             'name'=>'初中級者',
         ]);
-        Level::create([
+        DB::table('levels')->insert([
             'name'=>'中級者',
         ]);
-        Level::create([
+        DB::table('levels')->insert([
             'name'=>'中上級者',
         ]);
-        Level::create([
+        DB::table('levels')->insert([
             'name'=>'上級者',
         ]);
     

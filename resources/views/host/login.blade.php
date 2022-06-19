@@ -7,9 +7,9 @@
         <!-- Validation Errors -->
         <x-auth-validation-errors class="mb-4" :errors="$errors" />
 
-        <form method="POST" action="{{ route('login') }}">
+        <form method="POST" action="{{ route('hostLogin') }}">
             @csrf
-
+            <h1 class="mb-5">注意：これはホストアカウントのログインフォームです</h1>
             <!-- Email Address -->
             <div>
                 <x-label for="email" :value="__('メール')" />
@@ -47,5 +47,13 @@
                 </x-button>
             </div>
         </form>
+        <div class="mt-40 mb-5">
+            <h3 class="text-center text-sm text-gray-600">ホストアカウントをお持ちでないですか？</h3>
+            <h3 class="text-center text-sm text-gray-600">ホストになるとイベントを作ることができます</h3>
+            <x-button class="mt-4" onclick="location.href='/host/register'" method="GET" action="{{ route('hostRegister') }}">
+                {{ __('ホストアカウントの新規作成') }}
+            </x-button>
+        </div>
+        
     </x-auth-card>
 </x-guest-layout>

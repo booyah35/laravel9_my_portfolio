@@ -9,6 +9,7 @@
             @csrf
             <div>
                 <h1 class="text-center">アマスポに新規登録する</h3>
+                <h1 class="text-center">注意：こちらホストアカウントです</h3>
             </div>
             <!-- Name -->
             <div>
@@ -83,13 +84,13 @@
                 </div>
             </div>
             
-            <!-- interest -->
-            <div x-data="{interest: ''}" class="mt-4 block">
-                <x-label for="interest" :value="__('興味のあるスポーツ')" />
+            <!-- sport-id -->
+            <div x-data="{sport_id: ''}" class="mt-4 block">
+                <x-label for="sport_id" :value="__('イベントを開催するスポーツ')" />
                 <div class="block">
                     @foreach ($sports as $sport)
-                        <input id="interest" class="" type="radio" name="interest" :value="{{ $sport->id }}" x-model="interest" required >
-                        <label class="" for="interest">{{ $sport->name }} <br></label>
+                        <input id="sport_id" class="" type="radio" name="sport_id" :value="{{ $sport->id }}" x-model="sport_id" required >
+                        <label class="" for="sport_id">{{ $sport->name }} <br></label>
                     @endforeach
                 </div>
             </div>

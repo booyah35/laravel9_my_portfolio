@@ -1,19 +1,5 @@
-<!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-    <head>
-        <meta charset="utf-8">
-        <title>アマスポ</title>
-        <!-- Fonts -->
-        <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@200;600&display=swap" rel="stylesheet">
-        <!-- Styles -->
-        <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-        <link href="{{ asset('css/edit_bootstrap.css') }}" rel="stylesheet">
-    </head>
-    <body>
-    @extends('layouts.app')
-
-    @section('content')
-        
+<x-app-layout>
+      
     <div class="card">
         <img class="card-img" src="{{ asset("images/home_image.jpg") }}" alt="">
         <div class="card-img-overlay">
@@ -34,8 +20,4 @@
         </ul>
     </div>
     <i class="fa-solid fa-magnifying-glass"></i>
-    
-    
-    @endsection
-    </body>
-</html>
+</x-app-layout>

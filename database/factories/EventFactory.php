@@ -17,7 +17,7 @@ class EventFactory extends Factory
     public function definition()
     {
         return [
-            'name'=> $this->faker->name(),
+            'name'=> $this->faker->title(),
             'outline'=> $this->faker->paragraph(4),
             'address'=> $this->faker->address(),
             'event_date'=> $this->faker->date('Y-m-d'),
@@ -25,7 +25,7 @@ class EventFactory extends Factory
             'finish_time'=> $this->faker->time('H:i:s'),
             'capacity'=> $this->faker->numberBetween($min=2, $max=30),
             'sport_id'=> $this->faker->numberBetween(1,5),
-            'host_id'=> $this->faker->numberBetween(1,3),
+            'host_id'=> $this->faker->numberBetween(1,1),
             'level_id'=> $this->faker->numberBetween(1,5)
         ];
     }

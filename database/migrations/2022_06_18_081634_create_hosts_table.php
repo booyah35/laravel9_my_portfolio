@@ -23,7 +23,7 @@ class CreateHostsTable extends Migration
             $table->string('hometown', 20);
             $table->timestamps();
             $table->softDeletes();
-            $table->integer('telephone');
+            $table->string('telephone');
             $table->integer('age');
             $table->string('gender');
             

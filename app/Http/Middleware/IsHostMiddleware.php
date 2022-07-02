@@ -17,7 +17,7 @@ class IsHostMiddleware
      */
     public function handle(Request $request, Closure $next)
     {
-        if(!auth()->check() || !auth()->user() == Host::class){
+        if(!auth()->check() || Auth::guard('host')->user()){
             abort(403);
         }
         return $next($request);

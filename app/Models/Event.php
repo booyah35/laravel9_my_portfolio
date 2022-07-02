@@ -23,6 +23,24 @@ class Event extends Model
     {
         return $this->belongsTo(Host::class);
     }
+    
+    public function users()
+    {
+        return $this->belongsToMany(User::class);
+    }
+    
+    protected $fillable = [
+        'name',
+        'outline',
+        'address',
+        'event_date',
+        'start_time',
+        'finish_time',
+        'capacity',
+        'sport_id',
+        'level_id',
+        'host_id',
+    ];
 
 }
 

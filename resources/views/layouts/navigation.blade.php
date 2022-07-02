@@ -7,21 +7,38 @@
 
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-nav-link :href="route('index')" :active="request()->routeIs('index')">
-                        {{ __('一覧') }}
-                    </x-nav-link>
-                    <x-nav-link :href="route('sch_event')" :active="request()->routeIs('sch_event')">
-                        {{ __('イベントを探す') }}
-                    </x-nav-link>
-                    <x-nav-link :href="route('cfm_event')" :active="request()->routeIs('cfm_event')">
-                        {{ __('マイイベントを確認する') }}
-                    </x-nav-link>
-                    <x-nav-link :href="route('mk_review')" :active="request()->routeIs('mk_review')">
-                        {{ __('レビューをする') }}
-                    </x-nav-link>
-                    <x-nav-link :href="route('mk_event')" :active="request()->routeIs('mk_event')">
-                        {{ __('イベントを作る') }}
-                    </x-nav-link>
+                    @auth('web')
+                        <x-nav-link :href="route('index')" :active="request()->routeIs('index')">
+                        {{ __('ホーム') }}
+                        </x-nav-link>
+                        <x-nav-link :href="route('sch_event')" :active="request()->routeIs('sch_event')">
+                            {{ __('イベントを探す') }}
+                        </x-nav-link>
+                        <x-nav-link :href="route('cfm_event')" :active="request()->routeIs('cfm_event')">
+                            {{ __('マイイベントを確認する') }}
+                        </x-nav-link>
+                        <x-nav-link :href="route('mk_review')" :active="request()->routeIs('mk_review')">
+                            {{ __('レビューをする') }}
+                        </x-nav-link>
+                        <x-nav-link :href="route('mk_event')" :active="request()->routeIs('mk_event')">
+                            {{ __('イベントを作る') }}
+                        </x-nav-link>
+                    @endauth
+                    @auth('host')
+                        <x-nav-link :href="route('host_top')" :active="request()->routeIs('host_top')">
+                            {{ __('ホーム') }}
+                        </x-nav-link>
+                        <x-nav-link :href="route('sch_event')" :active="request()->routeIs('sch_event')">
+                            {{ __('イベントを探す') }}
+                        </x-nav-link>
+                        <x-nav-link :href="route('host_cfm_event')" :active="request()->routeIs('host_cfm_event')">
+                            {{ __('マイイベントを確認する') }}
+                        </x-nav-link>
+                        <x-nav-link :href="route('host_mk_event')" :active="request()->routeIs('host_mk_event')">
+                            {{ __('イベントを作る') }}
+                        </x-nav-link>
+                    @endauth
+                    
                 </div>
             </div>
 
@@ -30,8 +47,12 @@
                 <x-dropdown align="right" width="48">
                     <x-slot name="trigger">
                         <button class="flex items-center text-sm font-medium text-gray-500 hover:text-gray-700 hover:border-gray-300 focus:outline-none focus:text-gray-700 focus:border-gray-300 transition duration-150 ease-in-out">
-                            <div>{{ Auth::user()->name }}</div>
-
+                            @auth('web')
+                                <div>{{ Auth::user()->name }}</div>
+                            @endauth
+                            @auth('host')
+                                <div>{{ Auth::guard()->user()->name }}</div>
+                            @endauth
                             <div class="ml-1">
                                 <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
                                     <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
@@ -48,7 +69,7 @@
                             <x-dropdown-link :href="route('logout')"
                                     onclick="event.preventDefault();
                                                 this.closest('form').submit();">
-                                {{ __('Log Out') }}
+                                {{ __('ログアウト') }}
                             </x-dropdown-link>
                         </form>
                     </x-slot>
@@ -78,8 +99,14 @@
         <!-- Responsive Settings Options -->
         <div class="pt-4 pb-1 border-t border-gray-200">
             <div class="px-4">
+                @auth
                 <div class="font-medium text-base text-gray-800">{{ Auth::user()->name }}</div>
                 <div class="font-medium text-sm text-gray-500">{{ Auth::user()->email }}</div>
+                @endauth
+                @auth
+                <div class="font-medium text-base text-gray-800">{{ Auth::guard()->user()->name }}</div>
+                <div class="font-medium text-sm text-gray-500">{{ Auth::guard()->user()->email }}</div>
+                @endauth
             </div>
 
             <div class="mt-3 space-y-1">

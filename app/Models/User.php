@@ -14,6 +14,16 @@ class User extends Authenticatable
     public function sport() {
         return $this->belongsTo(Sport::class);
     }
+    
+    public function review()   
+    {
+        return $this->hasMany(Review::class);
+    }
+    
+    public function events()
+    {
+        return $this->belongsToMany(Event::class);
+    }
 
     /**
      * The attributes that are mass assignable.

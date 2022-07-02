@@ -10,14 +10,6 @@
     <div>
         <h4 class="text-center container-fluid p-4">アマスポにできること</h4>
     </div>
-    <div>
-        <h1 class="text-center container-fluid p-4">イベントに参加する</h4>
-        <ul class="navbar-nav mx-auto w-75 justify-content-between">
-            <li class="d-inline"><a class="text-dark" href="">イベントを探す</a></li>
-            <li class="d-inline"><a class="text-dark" href="">マイイベントを確認する</a></li>
-            <li class="d-inline"><a class="text-dark" href="">レビューをする</a></li>
-            <li class="d-inline"><a class="text-dark" href="">イベントを作る</a></li>
-        </ul>
-    </div>
+    
     <i class="fa-solid fa-magnifying-glass"></i>
 </x-app-layout>

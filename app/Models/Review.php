@@ -18,4 +18,11 @@ class Review extends Model
     {
         return $this->belongsTo(User::class);	 
     }
+    
+    protected $fillable = [
+        'host_id',
+        'user_id',
+        'evaluation',
+        'comments',
+    ];
 }

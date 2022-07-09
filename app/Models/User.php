@@ -15,7 +15,7 @@ class User extends Authenticatable
         return $this->belongsTo(Sport::class);
     }
     
-    public function review()   
+    public function reviews()   
     {
         return $this->hasMany(Review::class);
     }

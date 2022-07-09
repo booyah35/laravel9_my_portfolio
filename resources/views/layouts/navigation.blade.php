@@ -8,7 +8,7 @@
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     @auth('web')
-                        <x-nav-link :href="route('index')" :active="request()->routeIs('index')">
+                        <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                         {{ __('ホーム') }}
                         </x-nav-link>
                         <x-nav-link :href="route('sch_event')" :active="request()->routeIs('sch_event')">
@@ -31,11 +31,14 @@
                         <x-nav-link :href="route('sch_event')" :active="request()->routeIs('sch_event')">
                             {{ __('イベントを探す') }}
                         </x-nav-link>
+                        <x-nav-link :href="route('host_mk_event')" :active="request()->routeIs('host_mk_event')">
+                            {{ __('イベントを作る') }}
+                        </x-nav-link>
                         <x-nav-link :href="route('host_cfm_event')" :active="request()->routeIs('host_cfm_event')">
                             {{ __('マイイベントを確認する') }}
                         </x-nav-link>
-                        <x-nav-link :href="route('host_mk_event')" :active="request()->routeIs('host_mk_event')">
-                            {{ __('イベントを作る') }}
+                        <x-nav-link :href="route('host_cfm_event')" :active="request()->routeIs('host_cfm_event')">
+                            {{ __('自分へのレビューを見る') }}
                         </x-nav-link>
                     @endauth
                     
@@ -65,7 +68,6 @@
                         <!-- Authentication -->
                         <form method="POST" action="{{ route('logout') }}">
                             @csrf
-
                             <x-dropdown-link :href="route('logout')"
                                     onclick="event.preventDefault();
                                                 this.closest('form').submit();">

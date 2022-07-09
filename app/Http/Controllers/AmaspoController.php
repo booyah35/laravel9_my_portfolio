@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\{Sport, Level, Event, User};
+use App\Models\{Sport, Level, Event, User, Host, Review};
 use Illuminate\Support\Facades\Auth;
 
 class AmaspoController extends Controller
@@ -18,11 +18,11 @@ class AmaspoController extends Controller
         return view('amaspo/sch_event')->with([
             'sports' => $sport->get(),
             'levels' => $level->get(),
-            'events' => $event->get(),
+            'events' => $event->orderBy('event_date', 'desc')->get(),
             ]);
     }
     
-    public function sch_rslt(Request $request)
+    public function sch_rslt(Request $request, Sport $sport, Level $level)
     {
         // dd($request);
         //検索フォームに入力された値を取得
@@ -45,13 +45,22 @@ class AmaspoController extends Controller
             $query->where('event_date', 'LIKE', $event);
         }
 
-        $searched_events = $query->get();
+        $searched_events = $query->orderBy('event_date', 'desc')->orderBy('start_time', 'desc')->get();
         
         return view('amaspo/sch_rslt', compact('searched_events'));
     }
     
     public function detail_event(User $user, Event $event)
     {
+        $client = new \GuzzleHttp\Client();
+        $url = 'https://maps.googleapis.com/maps/api/js?key';
+        $api_use = config('services.googlemap.key');
+        // $response = $client->request(
+        //     'GET',
+        //     $url,
+        //     ['Bearer' => config('services.googlemap.token')]
+        // );
+
         return view('amaspo/detail_event' , compact('event'));
     }
     
@@ -64,11 +73,56 @@ class AmaspoController extends Controller
         
     }
     
+    public function cancel_join_event(Sport $sport, Level $level, Event $event)
+    {
+        // dd($event);
+        $event->users()->detach(Auth::id());
+        return redirect('/cfm_event')->with([
+            'sports' => $sport->get(),
+            'levels' => $level->get(),
+            'events' => Auth::guard('web')->user()->events()->get(),
+            ]);
+    }
+    
     public function show_join_event(Event $event)
     {
-    
         return view('amaspo/join_event');
-        
+    }
+    
+    public function cfm_event(Sport $sport, Level $level, Event $event)
+    {
+        return view('amaspo/cfm_event')->with([
+            'sports' => $sport->get(),
+            'levels' => $level->get(),
+            'events' => Auth::guard('web')->user()->events()->orderBy('event_date', 'desc')->orderBy('start_time', 'desc')->get(),
+            ]);
+    }
+    
+    public function mk_review(Host $host, User $user)
+    {
+        return view('amaspo/mk_review')->with([
+            'hosts' => $host->get(),
+            $user = Auth::id(),
+            ]);
+    }
+    
+    public function str_review(Request $request, Review $review, Host $host, User $user)
+    {
+        $request->validate([
+            'evaluation' => ['required'],
+            'comments' => ['required', 'string', 'max:800'],
+        ]);
+        // dd($request);
+        $review->user_id=Auth::guard('web')->user()->id;
+        $review->fill($request->input())->save();
+       
+
+        return view('amaspo/fnsh_review');
+    }    
+    
+    public function mk_event()
+    {
+        return view('amaspo/mk_event');
     }
 }
 

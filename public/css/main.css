@@ -14,3 +14,29 @@
 #top h4 {
     font-size: 2rem;
 }
+
+#user_mk_review {
+    background-image: url(../images/home_image.jpg);
+    background-size: cover;
+    min-height: 100vh;
+    color: white;
+    padding-top: 15rem;
+    background-repeat: no-repeat;
+}
+
+#user_mk_review h1 {
+    font-size: 1.5rem;
+}
+
+#fnsh_review {
+    background-image: url(../images/home_image.jpg);
+    background-size: cover;
+    min-height: 100vh;
+    color: white;
+    padding-top: 20rem;
+    background-repeat: no-repeat;
+}
+
+#fnsh_review h1 {
+    font-size: 1.5rem;
+}

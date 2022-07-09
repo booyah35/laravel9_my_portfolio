@@ -61,6 +61,6 @@ class RegisteredUserController extends Controller
 
         Auth::guard( name: 'host')->login($host);
 
-        return redirect(RouteServiceProvider::HOME);
+        return redirect(RouteServiceProvider::HOST_HOME);
     }
 }

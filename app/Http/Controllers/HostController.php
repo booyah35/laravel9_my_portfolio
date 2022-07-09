@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\{Sport, Level, Event, Host};
+use App\Models\{Sport, Level, Event, Host, User};
 use Auth;
 
 class HostController extends Controller
@@ -72,9 +72,11 @@ class HostController extends Controller
         return view('host/cfm_event')->with([
             'sports' => $sport->get(),
             'levels' => $level->get(),
-            'events' => Auth::guard('host')->user()->events()->get(),
-            
+            'events' => Auth::guard('host')->user()->events()->orderBy('event_date', 'desc')->orderBy('start_time', 'desc')->get(),
             ]);
-        
+    }
+    public function detail_event(User $user, Event $event)
+    {
+        return view('host/detail_event' , compact('event'));
     }
 }

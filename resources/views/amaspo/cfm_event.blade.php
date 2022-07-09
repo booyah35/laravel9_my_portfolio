@@ -1,5 +1,6 @@
 <x-app-layout>
-    <h1>ホストのイベント確認ページです</h1>
+    <h1>あなたが予約登録したイベントの一覧です</h1>
+    
     <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
         <thead class="text-xs text-gray-700 uppercase bg-cyan-100 dark:bg-gray-700 dark:text-gray-400">
             <tr>
@@ -11,9 +12,6 @@
                 </th>
                 <th scope="col" class="px-2 py-3">
                     レベル
-                </th>
-                <th scope="col" class="px-2 py-3">
-                    開催地
                 </th>
                 <th scope="col" class="px-2 py-3">
                     日程
@@ -42,9 +40,6 @@
                     {{ $event->level->name }}
                 </td>
                 <td class="px-2 py-4">
-                    {{ $event->address }}
-                </td>
-                <td class="px-2 py-4">
                     {{ $event->event_date }}
                 </td>
                 <td class="px-2 py-4">
@@ -54,7 +49,7 @@
                     {{ substr($event->finish_time, 0, 5) }}
                 </td>
                 <td class="px-2 py-4 text-left">
-                    <a href="detail_event/event/{{$event->id}}" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">詳細へ</a>
+                    <a href="/detail_event/event/{{$event->id}}" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">詳細へ</a>
                 </td>
             </tr>
         </tbody>

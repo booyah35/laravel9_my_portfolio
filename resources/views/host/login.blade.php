@@ -47,13 +47,6 @@
                 </x-button>
             </div>
         </form>
-        
-        <div class="flex justify-center pt-2">
-            <form method="POST" action="{{ route('logout') }}">
-                @csrf
-                <input type="submit" value="ログアウトする" class="content-center text-white bg-rose-500 from-teal-400 via-teal-500 to-teal-600 hover:bg-rose-700 focus:ring-4 focus:outline-none focus:ring-teal-300 dark:focus:ring-teal-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center my-2 mx-2"/>
-            </form>
-        </div>
         <div class="pt-16">
             <h3 class="text-center text-sm text-gray-600">ホストアカウントをお持ちでないですか？</h3>
             <h3 class="text-center text-sm text-gray-600">ホストになるとイベントを作ることができます</h3>

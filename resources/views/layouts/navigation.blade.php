@@ -28,7 +28,7 @@
                         <x-nav-link :href="route('host_top')" :active="request()->routeIs('host_top')">
                             {{ __('ホーム') }}
                         </x-nav-link>
-                        <x-nav-link :href="route('sch_event')" :active="request()->routeIs('sch_event')">
+                        <x-nav-link :href="route('host_sch_event')" :active="request()->routeIs('host_sch_event')">
                             {{ __('イベントを探す') }}
                         </x-nav-link>
                         <x-nav-link :href="route('host_mk_event')" :active="request()->routeIs('host_mk_event')">
@@ -36,9 +36,6 @@
                         </x-nav-link>
                         <x-nav-link :href="route('host_cfm_event')" :active="request()->routeIs('host_cfm_event')">
                             {{ __('マイイベントを確認する') }}
-                        </x-nav-link>
-                        <x-nav-link :href="route('host_cfm_event')" :active="request()->routeIs('host_cfm_event')">
-                            {{ __('自分へのレビューを見る') }}
                         </x-nav-link>
                     @endauth
                     

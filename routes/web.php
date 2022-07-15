@@ -38,6 +38,8 @@ Route::controller(AmaspoController::class)->middleware('auth:web')->group(functi
     Route::get('/mk_review', 'mk_review')->name('mk_review');
     Route::delete('/cancel_join_event/event/{event}', 'cancel_join_event')->name('cancel_join_event');
     Route::post('/str_review', 'str_review')->name('str_review');
+    Route::get('/show_profile', 'show_profile')->name('show_profile');
+
 });
 
 Route::controller(HostController::class)->group(function(){
@@ -52,12 +54,16 @@ Route::controller(HostController::class)->middleware('auth:host')->group(functio
     Route::post('/host/top', 'host_post_top')->name('host_post_top');
     Route::get('/host/mk_event', 'mk_event')->name('host_mk_event');
     Route::get('/host/str_event', 'str_event')->name('get_str_event');
+    Route::get('/host/edit_event/event/{event}', 'edit_event')->name('edit_event');
+    Route::put('/host/update_event/event/{event}', 'update_event')->name('update_event');
     Route::post('/host/str_event', 'str_event')->name('str_event');
     Route::get('/host/show_mked_event', 'show_mked_event')->name('show_mked_event');
     Route::get('/host/cfm_event', 'host_cfm_event')->name('host_cfm_event');
     Route::get('/host/detail_event/event/{event}', 'detail_event')->name('host_detail_event');
+    Route::delete('/host/delete_event/event/{event}', 'delete_event')->name('delete_event');
+    Route::get('/host/sch_event', 'host_sch_event')->name('host_sch_event');
+    Route::get('/host/sch_rslt', 'host_sch_rslt')->name('host_sch_rslt');
 
-    
 });
 
 

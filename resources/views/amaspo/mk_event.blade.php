@@ -2,7 +2,7 @@
     <div class="text-center pt-20" id="user_mk_review">
         <h1>このアカウントはユーザーアカウントのため、<br>イベントを作成することはできません。</h1>
         <h1 class="py-4">イベントを作成する場合はホストアカウントの登録が必要です。</h1>
-        <h1>イベントを作成したい場合は、一度ユーザーアカウントからログアウトし、<br>ホストアカウントの新規登録をしてください。</h1>
+        <h1>イベントを作成したい場合は、一度ユーザーアカウントからログアウトし、<br>ホストアカウントでログインしてください。</h1>
         <div class="flex justify-center pt-2">
             <form method="POST" action="{{ route('logout') }}">
                 @csrf

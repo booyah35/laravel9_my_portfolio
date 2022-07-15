@@ -1,7 +1,6 @@
 <x-app-layout>
-    
     <div class="search ">
-        <form action="{{ route('sch_rslt') }}" method="GET">
+        <form action="{{ route('host_sch_rslt') }}" method="GET">
             @csrf
             <div class="flex items-stretch bg-cyan-100 h-24">
                 <div class="flex-1 text-gray-700 text-center bg-emerald-300 rounded-xl px-4 py-2 m-2">

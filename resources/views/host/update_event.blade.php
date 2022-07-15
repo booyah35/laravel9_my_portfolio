@@ -1,11 +1,5 @@
 <x-app-layout>
-    <div class="flex justify-evenly pt-5 ">
-        <h1 class="text-center pt-2">こちらはイベントの詳細確認ページです</h1>
-        <form action="/host/edit_event/event/{{ $event->id }}" method="GET">
-            @csrf
-            <input type="submit" value="修正する" class="text-right text-white bg-violet-500 from-teal-400 via-teal-500 to-teal-600 hover:bg-violet-700 focus:ring-4 focus:outline-none focus:ring-teal-300 dark:focus:ring-teal-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2"/>
-        </form>
-    </div>
+    <h1 class="text-center pt-2">イベントの詳細が更新されました</h1>
     <div class="flex justify-center pt-3">
         <table class="bg-red-100 border-separate border-2 border-gray-500 w-3/5 rounded-md">
             <tr><th class="w-2/6 border border-gray-400 py-2">項目</th><th class="w-4/6 border border-gray-400">内容</th></tr>
@@ -21,14 +15,8 @@
             <tr><th class="border border-gray-400 py-2">概要</th><td class="border border-gray-400"><p class="">{{ $event->outline }}</p></td></tr>
         </table>
     </div>
-    <div class="flex justify-center pt-5">
-        <form action="/host/delete_event/event/{{ $event->id }}" id="alert_delete_event" method="POST">
-            @csrf
-            @method('DELETE')
-            <input type="submit" value="イベントを取り消す" class="text-right text-white bg-rose-500 from-teal-400 via-teal-500 to-teal-600 hover:bg-rose-700 focus:ring-4 focus:outline-none focus:ring-teal-300 dark:focus:ring-teal-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2"/>
-        </form>
-    </div>
-    <div class="flex justify-center pt-4 pb-20">
-        <iframe id='gmap' class="w-3/5 h-96 border-solid border-2 border-black rounded-xl content-center" frameborder='0' src='https://www.google.com/maps/embed/v1/place?key={{ config('services.googlemap.key') }}&q={{ $event->address }}'></iframe>
+    
+    <div class="flex justify-center pt-20">
+        <iframe id='gmap' class="w-3/5 h-96 content-center pb-12" frameborder='0' src='https://www.google.com/maps/embed/v1/place?key={{ config('services.googlemap.key') }}&q={{ $event->address }}'></iframe>
     </div>
 </x-app-layout>

@@ -67,6 +67,25 @@ class HostController extends Controller
         return view('host/show_mked_event');
     }
     
+    public function edit_event(Event $event, Sport $sport, Level $level)
+    {
+        return view('host/edit_event' , compact('event'))->with([
+            'sports' => $sport->get(),
+            'levels' => $level->get(),
+            ]);
+    }
+    
+    public function update_event(Request $request, Event $event)
+    {
+        // dd($event);
+        $input_event = $request['event'];
+        $event->host_id=Auth::guard('host')->user()->id;
+        $event->fill($input_event)->save();
+        // dd($event);
+
+        return view('host/update_event' , compact('event'));
+    }
+    
     public function host_cfm_event(Sport $sport, Level $level, Event $event)
     {
         return view('host/cfm_event')->with([
@@ -78,5 +97,45 @@ class HostController extends Controller
     public function detail_event(User $user, Event $event)
     {
         return view('host/detail_event' , compact('event'));
+    }
+    public function delete_event(Event $event)
+    {
+        $event->delete();
+        return redirect()->route('host_cfm_event');
+    }
+    public function host_sch_event(Sport $sport, Level $level, Event $event)
+    {
+        return view('host/host_sch_event')->with([
+            'sports' => $sport->get(),
+            'levels' => $level->get(),
+            'events' => $event->orderBy('event_date', 'desc')->get(),
+            ]);
+    }
+    public function host_sch_rslt(Request $request, Sport $sport, Level $level)
+    {
+        // dd($request);
+        //検索フォームに入力された値を取得
+        $sport = $request->input('sport');
+        $level = $request->input('level');
+        $event = $request->input('event');
+        
+
+        $query = Event::query();
+        
+        if(!empty($sport)) {
+            $query->where('sport_id', $sport);
+        }
+
+        if(!empty($level)) {
+            $query->where('level_id', $level);
+        }
+
+        if(!empty($event)) {
+            $query->where('event_date', 'LIKE', $event);
+        }
+
+        $searched_events = $query->orderBy('event_date', 'desc')->orderBy('start_time', 'desc')->get();
+        
+        return view('host/host_sch_rslt', compact('searched_events'));
     }
 }

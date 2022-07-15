@@ -55,19 +55,11 @@ class AmaspoController extends Controller
         $client = new \GuzzleHttp\Client();
         $url = 'https://maps.googleapis.com/maps/api/js?key';
         $api_use = config('services.googlemap.key');
-        // $response = $client->request(
-        //     'GET',
-        //     $url,
-        //     ['Bearer' => config('services.googlemap.token')]
-        // );
-
         return view('amaspo/detail_event' , compact('event'));
     }
     
     public function join_event(Request $request, Event $event)
     {
-        
-        
         $event->users()->attach(Auth::id()); 
         return redirect('/join_event/'. $event->id);
         
@@ -123,6 +115,11 @@ class AmaspoController extends Controller
     public function mk_event()
     {
         return view('amaspo/mk_event');
+    }
+    
+    public function show_profile()
+    {
+        return view('amaspo/show_profile');
     }
 }
 

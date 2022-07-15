@@ -36,7 +36,7 @@
     </div>
     
     <h1 class="text-center pt-6">Google Map</h1>
-    <div class="flex justify-center pt-2">
-        <iframe id='gmap' class="w-3/5 h-96 content-center pb-12" frameborder='0' src='https://www.google.com/maps/embed/v1/place?key={{ config('services.googlemap.key') }}&q={{ $event->address }}'></iframe>
+    <div class="flex justify-center pt-2 pb-12">
+        <iframe id='gmap' class="w-3/5 h-96 border-solid border-2 border-black rounded-xl content-center" frameborder='0' src='https://www.google.com/maps/embed/v1/place?key={{ config('services.googlemap.key') }}&q={{ $event->address }}'></iframe>
     </div>
 </x-app-layout>

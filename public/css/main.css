@@ -40,3 +40,16 @@
 #fnsh_review h1 {
     font-size: 1.5rem;
 }
+
+#update_profile {
+    background-image: url(../images/home_image.jpg);
+    background-size: cover;
+    min-height: 100vh;
+    color: white;
+    padding-top: 20rem;
+    background-repeat: no-repeat;
+}
+
+#update_profile h1 {
+    font-size: 1.5rem;
+}

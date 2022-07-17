@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\{Sport, Level, Event, User, Host, Review};
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class AmaspoController extends Controller
 {
@@ -52,6 +53,14 @@ class AmaspoController extends Controller
     
     public function detail_event(User $user, Event $event)
     {
+        // $participants = DB::table('event_user')
+        //     ->select('event_id')
+        //     ->selectRaw('COUNT(user_id) as count_participants')
+        //     ->groupBy('event_id')
+        //     ->get();
+        
+        // dd($event->users()->count());
+        
         $client = new \GuzzleHttp\Client();
         $url = 'https://maps.googleapis.com/maps/api/js?key';
         $api_use = config('services.googlemap.key');
@@ -117,9 +126,24 @@ class AmaspoController extends Controller
         return view('amaspo/mk_event');
     }
     
-    public function show_profile()
+    public function show_profile(User $user)
     {
-        return view('amaspo/show_profile');
+        return view('amaspo/show_profile')->with([
+            $user = Auth::guard('web'),
+            ]);
+    }
+    public function edit_profile(User $user)
+    {
+        return view('amaspo/edit_profile')->with([
+            $user = Auth::guard('web'),
+            ]);
+    }
+    public function update_profile(Request $request, User $user)
+    {
+        $user = User::find($request->user()->id);
+        $user_post = $request["user"];
+        $user->fill($user_post)->save();
+        return view('amaspo/update_profile');
     }
 }
 

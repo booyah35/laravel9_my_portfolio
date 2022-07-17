@@ -11,12 +11,12 @@
            <tr><th class="border border-gray-400 py-2">日程</th><td class="border border-gray-400"><p class="text-center">{{ $event->event_date }}</p></td></tr>
            <tr><th class="border border-gray-400 py-2">開始時間</th><td class="border border-gray-400"><p class="text-center">{{ substr($event->start_time, 0, 5) }}</p></td></tr>
            <tr><th class="border border-gray-400 py-2">終了時間</th><td class="border border-gray-400"><p class="text-center">{{ substr($event->finish_time, 0, 5) }}</p></td></tr>
-           <tr><th class="border border-gray-400 py-2">参加定員</th><td class="border border-gray-400"><p class="text-center">{{ $event->capacity }}</p></td></tr>
+           <tr><th class="border border-gray-400 py-2">参加定員</th><td class="border border-gray-400"><p class="text-center">{{ $event->capacity }}人（{{ $event->users()->count()}}人参加登録済み）</p></td></tr>
            <tr><th class="border border-gray-400 py-2">概要</th><td class="border border-gray-400"><p class="text-center">{{ $event->outline }}</p></td></tr>
         </table>
     </div>
     <div class="">
-        @if($event->users(Auth::id())->exists())
+        @if($event->users()->find(Auth::id()))
             <h1 class="text-blue-600 text-center pt-4">注意！：参加登録済みです</h1>
             <div class="flex justify-center pt-2">
                 <form action="/cancel_join_event/event/{{ $event->id }}" method="POST">

@@ -39,7 +39,8 @@ Route::controller(AmaspoController::class)->middleware('auth:web')->group(functi
     Route::delete('/cancel_join_event/event/{event}', 'cancel_join_event')->name('cancel_join_event');
     Route::post('/str_review', 'str_review')->name('str_review');
     Route::get('/show_profile', 'show_profile')->name('show_profile');
-
+    Route::get('/edit_profile', 'edit_profile')->name('edit_profile');
+    Route::put('/update_profile', 'update_profile')->name('update_profile');
 });
 
 Route::controller(HostController::class)->group(function(){

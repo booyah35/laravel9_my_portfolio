@@ -23,6 +23,9 @@
                         <x-nav-link :href="route('mk_event')" :active="request()->routeIs('mk_event')">
                             {{ __('イベントを作る') }}
                         </x-nav-link>
+                        <x-nav-link :href="route('show_profile')" :active="request()->routeIs('show_profile')">
+                            {{ __('プロフィール') }}
+                        </x-nav-link>
                     @endauth
                     @auth('host')
                         <x-nav-link :href="route('host_top')" :active="request()->routeIs('host_top')">

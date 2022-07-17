@@ -53,14 +53,6 @@ class AmaspoController extends Controller
     
     public function detail_event(User $user, Event $event)
     {
-        // $participants = DB::table('event_user')
-        //     ->select('event_id')
-        //     ->selectRaw('COUNT(user_id) as count_participants')
-        //     ->groupBy('event_id')
-        //     ->get();
-        
-        // dd($event->users()->count());
-        
         $client = new \GuzzleHttp\Client();
         $url = 'https://maps.googleapis.com/maps/api/js?key';
         $api_use = config('services.googlemap.key');

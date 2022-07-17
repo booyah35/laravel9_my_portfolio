@@ -1,6 +1,7 @@
 <x-app-layout>
-    <h1>あなたが予約登録したイベントの一覧です</h1>
-    
+    <div class="py-1">
+        <h1 class="text-center text-xl">あなたが予約登録したイベントの一覧です</h1>
+    </div>
     <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
         <thead class="text-xs text-gray-700 uppercase bg-cyan-100 dark:bg-gray-700 dark:text-gray-400">
             <tr>

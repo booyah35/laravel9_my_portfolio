@@ -46,6 +46,8 @@ Route::controller(AmaspoController::class)->middleware('auth:web')->group(functi
 Route::controller(HostController::class)->group(function(){
     Route::get('/host/login', 'host_login')->name('host_login');
     Route::get('/host/register', 'host_register')->name('host_register');
+    Route::post('/host/login', 'store')->name('host_post_login');
+    Route::post('/host/logout', 'destroy')->name('host_logout');
 });
     
 
@@ -64,6 +66,9 @@ Route::controller(HostController::class)->middleware('auth:host')->group(functio
     Route::delete('/host/delete_event/event/{event}', 'delete_event')->name('delete_event');
     Route::get('/host/sch_event', 'host_sch_event')->name('host_sch_event');
     Route::get('/host/sch_rslt', 'host_sch_rslt')->name('host_sch_rslt');
+    Route::get('host/host_show_profile', 'host_show_profile')->name('host_show_profile');
+    Route::get('host/host_edit_profile', 'host_edit_profile')->name('host_edit_profile');
+    Route::put('host/host_update_profile', 'host_update_profile')->name('host_update_profile');
 
 });
 

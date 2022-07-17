@@ -723,6 +723,10 @@ select {
   margin-left: 0.5rem;
   margin-right: 0.5rem;
 }
+.my-3 {
+  margin-top: 0.75rem;
+  margin-bottom: 0.75rem;
+}
 .ml-3 {
   margin-left: 0.75rem;
 }
@@ -1180,6 +1184,10 @@ select {
   padding-top: 0.25rem;
   padding-bottom: 0.25rem;
 }
+.py-10 {
+  padding-top: 2.5rem;
+  padding-bottom: 2.5rem;
+}
 .pt-1 {
   padding-top: 0.25rem;
 }
@@ -1231,6 +1239,12 @@ select {
 .pt-16 {
   padding-top: 4rem;
 }
+.pb-4 {
+  padding-bottom: 1rem;
+}
+.pt-40 {
+  padding-top: 10rem;
+}
 .text-left {
   text-align: left;
 }
@@ -1262,6 +1276,10 @@ select {
 .text-base {
   font-size: 1rem;
   line-height: 1.5rem;
+}
+.text-xl {
+  font-size: 1.25rem;
+  line-height: 1.75rem;
 }
 .font-medium {
   font-weight: 500;

@@ -40,6 +40,9 @@
                         <x-nav-link :href="route('host_cfm_event')" :active="request()->routeIs('host_cfm_event')">
                             {{ __('マイイベントを確認する') }}
                         </x-nav-link>
+                        <x-nav-link :href="route('host_show_profile')" :active="request()->routeIs('host_show_profile')">
+                            {{ __('プロフィール') }}
+                        </x-nav-link>
                     @endauth
                     
                 </div>
@@ -66,14 +69,26 @@
 
                     <x-slot name="content">
                         <!-- Authentication -->
-                        <form method="POST" action="{{ route('logout') }}">
-                            @csrf
-                            <x-dropdown-link :href="route('logout')"
-                                    onclick="event.preventDefault();
-                                                this.closest('form').submit();">
-                                {{ __('ログアウト') }}
-                            </x-dropdown-link>
-                        </form>
+                        @auth('web')
+                            <form method="POST" action="{{ route('logout') }}">
+                                @csrf
+                                <x-dropdown-link :href="route('logout')"
+                                        onclick="event.preventDefault();
+                                                    this.closest('form').submit();">
+                                    {{ __('ログアウト') }}
+                                </x-dropdown-link>
+                            </form>
+                        @endauth
+                        @auth('host')
+                            <form method="POST" action="{{ route('host_logout') }}">
+                                @csrf
+                                <x-dropdown-link :href="route('host_logout')"
+                                        onclick="event.preventDefault();
+                                                    this.closest('form').submit();">
+                                    {{ __('ログアウト') }}
+                                </x-dropdown-link>
+                            </form>
+                        @endauth
                     </x-slot>
                 </x-dropdown>
             </div>

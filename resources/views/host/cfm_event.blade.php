@@ -1,5 +1,7 @@
 <x-app-layout>
-    <h1>ホストのイベント確認ページです</h1>
+    <div class="py-2">
+        <h1 class="">ホストのイベント確認ページです</h1>
+    </div>
     <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
         <thead class="text-xs text-gray-700 uppercase bg-cyan-100 dark:bg-gray-700 dark:text-gray-400">
             <tr>
@@ -14,6 +16,9 @@
                 </th>
                 <th scope="col" class="px-2 py-3">
                     開催地
+                </th>
+                <th scope="col" class="px-2 py-3">
+                    定員
                 </th>
                 <th scope="col" class="px-2 py-3">
                     日程
@@ -45,6 +50,9 @@
                     {{ $event->address }}
                 </td>
                 <td class="px-2 py-4">
+                    {{ $event->users()->count() }}/{{ $event->capacity }}
+                </td>
+                <td class="px-2 py-4">
                     {{ $event->event_date }}
                 </td>
                 <td class="px-2 py-4">
@@ -54,7 +62,7 @@
                     {{ substr($event->finish_time, 0, 5) }}
                 </td>
                 <td class="px-2 py-4 text-left">
-                    <a href="detail_event/event/{{$event->id}}" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">詳細へ</a>
+                    <a href="/host/detail_event/event/{{$event->id}}" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">詳細へ</a>
                 </td>
             </tr>
         </tbody>

@@ -54,7 +54,7 @@
                         {{ substr($searched_event->finish_time, 0, 5) }}
                     </td>
                     <td class="px-2 py-4 text-left">
-                        <a href="/detail_event/event/{{$searched_event->id}}" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">詳細へ</a>
+                        <a href="/host/detail_event/event/{{$searched_event->id}}" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">詳細へ</a>
                     </td>
                 </tr>
             </tbody>

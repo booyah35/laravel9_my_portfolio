@@ -1,5 +1,8 @@
 <x-app-layout>
     <div class="search ">
+        <div class="py-1 bg-cyan-100">
+            <h1 class="text-center text-xl">検索条件</h1>
+        </div>
         <form action="{{ route('host_sch_rslt') }}" method="GET">
             @csrf
             <div class="flex items-stretch bg-cyan-100 h-24">

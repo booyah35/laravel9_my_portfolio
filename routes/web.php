@@ -3,7 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AmaspoController;
 use App\Http\Controllers\HostController;
-
+use App\Http\Controllers\GuestController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -23,7 +23,14 @@ Route::prefix( prefix: 'host')->group(function() {
     require __DIR__.'/Host/auth.php';
 });
 
+Route::controller(GuestController::class)->group(function(){
+    Route::get('/', 'welcome')->name('welcome');
+    Route::get('/guest_sch_event', 'guest_sch_event')->name('guest_sch_event');
+    Route::get('/guest_sch_rslt', 'guest_sch_rslt')->name('guest_sch_rslt');
+    Route::get('/guest/detail_event/event/{event}', 'guest_detail_event')->name('guest_detail_event');
+    Route::get('/guest_mk_event', 'guest_mk_event')->name('guest_mk_event');
 
+});
 
 Route::controller(AmaspoController::class)->middleware('auth:web')->group(function(){
     Route::get('/index', 'index')->name('index');

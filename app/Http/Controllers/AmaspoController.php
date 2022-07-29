@@ -9,10 +9,6 @@ use Illuminate\Support\Facades\DB;
 
 class AmaspoController extends Controller
 {
-    public function index()
-    {
-        return view('amaspo/index');
-    }
     
     public function sch_event(Sport $sport, Level $level, Event $event)
     {

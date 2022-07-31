@@ -28,6 +28,11 @@ class Event extends Model
     {
         return $this->belongsToMany(User::class);
     }
+    public function getByLimit(int $limit_count = 20)
+    {
+        // event_dateで降順に並べたあと、limitで件数制限をかける
+        return $this->orderBy('event_date', 'DESC')->limit($limit_count)->get();
+    }
     
     protected $fillable = [
         'name',

@@ -16,7 +16,7 @@
         </table>
     </div>
     <div class="">
-        @if($event->users()->find(Auth::id()))
+        @if ($event->users()->find(Auth::id()))
             <h1 class="text-blue-600 text-center pt-4">注意！：参加登録済みです</h1>
             <div class="flex justify-center pt-2">
                 <form action="/cancel_join_event/event/{{ $event->id }}" method="POST">
@@ -25,14 +25,35 @@
                     <input type="submit" value="参加をキャンセルする" class="content-center text-white bg-rose-500 from-teal-400 via-teal-500 to-teal-600 hover:bg-rose-700 focus:ring-4 focus:outline-none focus:ring-teal-300 dark:focus:ring-teal-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center my-2 mx-2"/>
                 </form>
             </div>
-        @else
-            <div class="flex justify-center pt-5">
-                <form action="/join_event/{{ $event->id }}" method="POST">
-                    @csrf
-                    <input type="submit" value="参加登録する" class="text-white bg-gradient-to-r from-teal-400 via-teal-500 to-teal-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-teal-300 dark:focus:ring-teal-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2"/>
-                </form>
-            </div>
+            @elseif ($event->users()->count() >= $event->capacity)
+                <h1 class="text-blue-600 text-center pt-4">注意！：定員が埋まっているため、参加できません</h1>
+            @else
+                <div class="flex justify-center pt-5">
+                    <form action="/join_event/{{ $event->id }}" method="POST">
+                        @csrf
+                        <input type="submit" value="参加登録する" class="text-white bg-gradient-to-r from-teal-400 via-teal-500 to-teal-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-teal-300 dark:focus:ring-teal-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2"/>
+                    </form>
+                </div>
         @endif
+        
+        
+        <!--@if ($event->users()->find(Auth::id()))-->
+        <!--    <h1 class="text-blue-600 text-center pt-4">注意！：参加登録済みです</h1>-->
+        <!--    <div class="flex justify-center pt-2">-->
+        <!--        <form action="/cancel_join_event/event/{{ $event->id }}" method="POST">-->
+        <!--            @csrf-->
+        <!--            @method('DELETE')-->
+        <!--            <input type="submit" value="参加をキャンセルする" class="content-center text-white bg-rose-500 from-teal-400 via-teal-500 to-teal-600 hover:bg-rose-700 focus:ring-4 focus:outline-none focus:ring-teal-300 dark:focus:ring-teal-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center my-2 mx-2"/>-->
+        <!--        </form>-->
+        <!--    </div>-->
+        <!--@else-->
+        <!--    <div class="flex justify-center pt-5">-->
+        <!--        <form action="/join_event/{{ $event->id }}" method="POST">-->
+        <!--            @csrf-->
+        <!--            <input type="submit" value="参加登録する" class="text-white bg-gradient-to-r from-teal-400 via-teal-500 to-teal-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-teal-300 dark:focus:ring-teal-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2"/>-->
+        <!--        </form>-->
+        <!--    </div>-->
+        <!--@endif-->
     </div>
     
     <h1 class="text-center pt-6">Google Map</h1>

@@ -39,6 +39,7 @@ class User extends Authenticatable
         'interest',
         'age',
         'telephone',
+        'profile_image',
     ];
 
     /**

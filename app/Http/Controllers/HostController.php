@@ -26,7 +26,14 @@ class HostController extends Controller
         $check = $request->only('email', 'password');
 
         $host = Host::where('email', $check['email'])->first();
-        $hashedPassword = $host->password;
+        // $hashedPassword = Host::where('password', $check['password']);
+       
+       if($host){
+           $hashedPassword = $host->password;
+       } else {
+           return back()->with(['msg' => 'Your email was rejected']);
+       }
+       
 
         if(!Hash::check($check['password'], $hashedPassword))
             return back()->with('Your password was rejected');
@@ -142,55 +149,44 @@ class HostController extends Controller
     }
     public function host_sch_rslt(Request $request, Sport $sport, Level $level)
     {
-        // dd($request);
         //検索フォームに入力された値を取得
         $sport = $request->input('sport');
         $level = $request->input('level');
         $event = $request->input('event');
-        
-
+    
         $query = Event::query();
-        
         if(!empty($sport)) {
             $query->where('sport_id', $sport);
         }
-
         if(!empty($level)) {
             $query->where('level_id', $level);
         }
-
         if(!empty($event)) {
             $query->where('event_date', 'LIKE', $event);
         }
-
-        $searched_events = $query->orderBy('event_date', 'desc')->orderBy('start_time', 'desc')->get();
-        
+        $searched_events = $query->orderBy('event_date', 'desc')->orderBy('start_time', 'desc')->paginate(15);
         return view('host/host_sch_rslt', compact('searched_events'));
     }
     public function host_show_profile(Host $host)
     {
-        return view('host/host_show_profile')->with([
-            $host = Auth::guard('host'),
-            ]);
+        return view('host/host_show_profile');
     }
     public function host_edit_profile(Host $host)
     {
-        return view('host/host_edit_profile')->with([
-            $host = Auth::guard('host'),
-            ]);
+        return view('host/host_edit_profile');
     }
     public function host_update_profile(Request $request, Host $host)
     {
+        // dd($request);
         $host = Host::find($request->user()->id);
+        if ($request->profile_image != null) {
+            // storeメソッドで一意のファイル名を自動生成しつつstorage/app/public/profile_imagesに保存し、そのファイル名（ファイルパス）を$profileImagePathとして生成
+            $profileImagePath = $request->profile_image->store('public/profile_images');
+            // $updateUserのprofile_imageカラムに$profileImagePath（ファイルパス）を保存
+            $host->profile_image = $profileImagePath;
+        }
         $host_post = $request["host"];
         $host->fill($host_post)->save();
         return view('host/host_update_profile');
-    }
-    public function update_profile(Request $request, User $user)
-    {
-        $user = User::find($request->user()->id);
-        $user_post = $request["user"];
-        $user->fill($user_post)->save();
-        return view('amaspo/update_profile');
     }
 }

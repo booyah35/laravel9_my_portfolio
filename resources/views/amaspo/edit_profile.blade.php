@@ -1,5 +1,5 @@
 <x-app-layout>
-    <form action="{{ route('update_profile') }}" method="POST">
+    <form action="{{ route('update_profile') }}" method="POST" enctype="multipart/form-data">
         @csrf
         @method('PUT')
         @if ($errors->any())
@@ -12,6 +12,19 @@
     	    </div>
     	@endif
     	<h1 class="text-center py-3">こちらは{{ Auth::user()->name }}さんのプロフィール修正ページです</h1>
+    	<div id="fade_picture" class="flex flex-col items-center py-3">
+            @if (Auth::user()->profile_image === null)
+               <img id="prf_img" class="mb-3 w-48 h-48 rounded-full shadow-lg" src="{{ asset('images/noimage.jpg') }}" alt="プロフィール画像">
+            @else
+               <img id="prf_img" class="mb-3 w-48 h-48 rounded-full shadow-lg" src="{{ Storage::url(Auth::user()->profile_image) }}" alt="プロフィール画像">
+            @endif
+        </div>
+        <div class="flex flex-col items-center py-3">
+            <div id="preview"></div>
+        </div>
+        <div class="flex flex-col items-center pb-4">            
+            <input id="profile_image" name="profile_image" type="file" class="form-control @error('profile-image') is-invalid @enderror" value="{{ Auth::user()->profile_image }}" accept="image/png, image/jpeg, image/jpg">
+        </div>
     	<div class="flex justify-center">
             <table class="bg-cyan-100 border-separate border-2 border-gray-500 w-3/5 rounded-md">
                 <tr>

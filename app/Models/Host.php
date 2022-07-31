@@ -34,5 +34,6 @@ class Host extends Authenticatable
         'sport_id',
         'age',
         'telephone',
+        'profile_image',
     ];
 }

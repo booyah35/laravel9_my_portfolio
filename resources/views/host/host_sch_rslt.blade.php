@@ -60,5 +60,6 @@
             </tbody>
             @endforeach
         </table>
+        {{ $searched_events->appends(request()->query())->links() }}
     </div>
 </x-app-layout>

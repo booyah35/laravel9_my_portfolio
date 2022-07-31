@@ -34,14 +34,15 @@
                 </div>
                 <div class="flex-1 text-gray-700 text-center bg-emerald-300 rounded-xl px-4 py-2 m-2">
                     <div>
-                        <label for="event" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-400">日程
+                        <label for="event_date" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-400">日程
                         <div>
-                            <select name="event" data-toggle="select" class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                                <option value="">全て</option>
-                                @foreach ($events as $event)
-                                    <option value="{{ $event->event_date }}" @if($event=='{{ $event->event_date }}') selected @endif>{{ $event->event_date }}</option>
-                                @endforeach
-                            </select>
+                            <input id="event_date" type="date" name="event_date" value="{{ old('event_date') }}" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder=""></input>
+                            <!--<select name="event" data-toggle="select" class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">-->
+                            <!--    <option value="">全て</option>-->
+                            <!--    @foreach ($events as $event)-->
+                            <!--        <option value="{{ $event->event_date }}" @if($event=='{{ $event->event_date }}') selected @endif>{{ $event->event_date }}</option>-->
+                            <!--    @endforeach-->
+                            <!--</select>-->
                         </div>
                         </label>
                     </div>

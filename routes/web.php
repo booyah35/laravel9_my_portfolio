@@ -48,6 +48,10 @@ Route::controller(AmaspoController::class)->middleware('auth:web')->group(functi
     Route::get('/show_profile', 'show_profile')->name('show_profile');
     Route::get('/edit_profile', 'edit_profile')->name('edit_profile');
     Route::put('/update_profile', 'update_profile')->name('update_profile');
+    Route::get('/show_host_profile/host/{host}', 'show_host_profile')->name('show_host_profile');
+    Route::post('/follow_host/{host}', 'follow_host')->name('follow_host');
+    Route::delete('/unfollow_host/{host}', 'unfollow_host')->name('unfollow_host');
+    Route::get('/index_follow_host', 'index_follow_host')->name('index_follow_host');
 });
 
 Route::controller(HostController::class)->group(function(){
@@ -76,7 +80,9 @@ Route::controller(HostController::class)->middleware('auth:host')->group(functio
     Route::get('host/host_show_profile', 'host_show_profile')->name('host_show_profile');
     Route::get('host/host_edit_profile', 'host_edit_profile')->name('host_edit_profile');
     Route::put('host/host_update_profile', 'host_update_profile')->name('host_update_profile');
-
+    Route::get('host/index_follower', 'index_follower')->name('index_follower');
+    Route::get('host/show_user_profile/user/{user}', 'show_user_profile')->name('show_user_profile');
+    Route::get('host/show_other_host_profile/host/{host}', 'show_other_host_profile')->name('show_other_host_profile');
 });
 
 

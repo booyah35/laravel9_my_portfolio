@@ -7,6 +7,7 @@ use App\Models\{Sport, Level, Event, User, Host, Review};
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Storage;
+use Carbon\Carbon;
 
 class AmaspoController extends Controller
 {
@@ -54,28 +55,23 @@ class AmaspoController extends Controller
     
     public function detail_event(User $user, Event $event)
     {
+        $date = Carbon::now();
         $client = new \GuzzleHttp\Client();
         $url = 'https://maps.googleapis.com/maps/api/js?key';
         $api_use = config('services.googlemap.key');
-        return view('amaspo/detail_event' , compact('event'));
+        return view('amaspo/detail_event' , compact('event'), compact('date'));
     }
     
     public function join_event(Request $request, Event $event)
     {
-        $event->users()->attach(Auth::id()); 
-        return redirect('/join_event/'. $event->id);
-        
+        $event->users()->attach(Auth::id());
+        return back();
     }
     
     public function cancel_join_event(Sport $sport, Level $level, Event $event)
     {
-        // dd($event);
         $event->users()->detach(Auth::id());
-        return redirect('/cfm_event')->with([
-            'sports' => $sport->get(),
-            'levels' => $level->get(),
-            'events' => Auth::guard('web')->user()->events()->get(),
-            ]);
+        return back();
     }
     
     public function show_join_event(Event $event)
@@ -85,10 +81,9 @@ class AmaspoController extends Controller
     
     public function cfm_event(Sport $sport, Level $level, Event $event)
     {
-        return view('amaspo/cfm_event')->with([
-            'sports' => $sport->get(),
-            'levels' => $level->get(),
-            'events' => Auth::guard('web')->user()->events()->orderBy('event_date', 'desc')->orderBy('start_time', 'desc')->get(),
+        $date = Carbon::now();
+        return view('amaspo/cfm_event', compact('date'))->with([
+            'events' => Auth::guard('web')->user()->events()->orderBy('event_date', 'desc')->orderBy('start_time', 'desc')->paginate(10),
             ]);
     }
     
@@ -109,8 +104,6 @@ class AmaspoController extends Controller
         // dd($request);
         $review->user_id=Auth::guard('web')->user()->id;
         $review->fill($request->input())->save();
-       
-
         return view('amaspo/fnsh_review');
     }    
     
@@ -127,6 +120,26 @@ class AmaspoController extends Controller
     {
         return view('amaspo/edit_profile');
     }
+    public function show_host_profile(Host $host)
+    {
+        return view('amaspo/show_host_profile' , compact('host'));
+    }
+    public function follow_host(Request $request, Host $host)
+    {
+        $host->users()->attach(Auth::id()); 
+        return back();
+    }
+    public function unfollow_host(Request $request, Host $host)
+    {
+        $host->users()->detach(Auth::id());
+        return back();
+    }
+    public function index_follow_host(Host $host)
+    {
+        return view('amaspo/index_follow_host')->with([
+            'hosts' => Auth::guard('web')->user()->hosts()->get(),
+            ]);
+    }
     public function update_profile(Request $request, User $user)
     {
         
@@ -137,15 +150,15 @@ class AmaspoController extends Controller
             
             $path = Storage::disk('s3')->putFile('user_prf_img', $prf_img, 'public');
             // dd($prf_img);
-            if ($path){
-                $user->profile_image = Storage::disk('s3')->url($path);
-            }
+            // if ($path){
+            //     $user->profile_image = Storage::disk('s3')->url($path);
+            // }
             // dd($path);
             // dd($user);
-            // // storeメソッドで一意のファイル名を自動生成しつつstorage/app/public/profile_imagesに保存し、そのファイル名（ファイルパス）を$profileImagePathとして生成
-            // $profileImagePath = $request->profile_image->store('public/profile_images');
-            // // $updateUserのprofile_imageカラムに$profileImagePath（ファイルパス）を保存
-            // $user->profile_image = $profileImagePath;
+            // storeメソッドで一意のファイル名を自動生成しつつstorage/app/public/profile_imagesに保存し、そのファイル名（ファイルパス）を$profileImagePathとして生成
+            $profileImagePath = $request->profile_image->store('public/profile_images');
+            // $updateUserのprofile_imageカラムに$profileImagePath（ファイルパス）を保存
+            $user->profile_image = $profileImagePath;
         }
         $user_post = $request["user"];
         $user->fill($user_post)->save();

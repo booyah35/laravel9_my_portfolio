@@ -24,6 +24,9 @@
                         <x-nav-link :href="route('show_profile')" :active="request()->routeIs('show_profile')">
                             {{ __('プロフィール') }}
                         </x-nav-link>
+                        <x-nav-link :href="route('index_follow_host')" :active="request()->routeIs('index_follow_host')">
+                            {{ __('フォローリスト') }}
+                        </x-nav-link>
                     @endauth
                     @auth('host')
                         <x-nav-link :href="route('host_top')" :active="request()->routeIs('host_top')">
@@ -40,6 +43,9 @@
                         </x-nav-link>
                         <x-nav-link :href="route('host_show_profile')" :active="request()->routeIs('host_show_profile')">
                             {{ __('プロフィール') }}
+                        </x-nav-link>
+                        <x-nav-link :href="route('index_follower')" :active="request()->routeIs('index_follower')">
+                            {{ __('フォロワーリスト') }}
                         </x-nav-link>
                     @endauth
                 </div>
@@ -105,19 +111,59 @@
     <!-- Responsive Navigation Menu -->
     <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
         <div class="pt-2 pb-3 space-y-1">
+            @auth('web')
             <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                {{ __('Dashboard') }}
+                {{ __('ホーム') }}
             </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('sch_event')" :active="request()->routeIs('sch_event')">
+                {{ __('イベントを探す') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('cfm_event')" :active="request()->routeIs('cfm_event')">
+                {{ __('マイイベントを確認する') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('mk_review')" :active="request()->routeIs('mk_review')">
+                {{ __('レビューをする') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('mk_event')" :active="request()->routeIs('mk_event')">
+                {{ __('イベントを作る') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('show_profile')" :active="request()->routeIs('show_profile')">
+                {{ __('プロフィール') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('index_follow_host')" :active="request()->routeIs('index_follow_host')">
+                {{ __('フォローリスト') }}
+            </x-responsive-nav-link>
+            @endauth
+            @auth('host')
+            <x-responsive-nav-link :href="route('host_top')" :active="request()->routeIs('host_top')">
+                {{ __('ホーム') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('host_sch_event')" :active="request()->routeIs('host_sch_event')">
+                {{ __('イベントを探す') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('host_mk_event')" :active="request()->routeIs('host_mk_event')">
+                {{ __('イベントを作る') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('host_cfm_event')" :active="request()->routeIs('host_cfm_event')">
+                {{ __('マイイベントを確認する') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('host_show_profile')" :active="request()->routeIs('host_show_profile')">
+                {{ __('プロフィール') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('index_follower')" :active="request()->routeIs('index_follower')">
+                {{ __('フォローリスト') }}
+            </x-responsive-nav-link>
+            @endauth
         </div>
 
         <!-- Responsive Settings Options -->
         <div class="pt-4 pb-1 border-t border-gray-200">
             <div class="px-4">
-                @auth
+                @auth('web')
                 <div class="font-medium text-base text-gray-800">{{ Auth::user()->name }}</div>
                 <div class="font-medium text-sm text-gray-500">{{ Auth::user()->email }}</div>
                 @endauth
-                @auth
+                @auth('host')
                 <div class="font-medium text-base text-gray-800">{{ Auth::guard()->user()->name }}</div>
                 <div class="font-medium text-sm text-gray-500">{{ Auth::guard()->user()->email }}</div>
                 @endauth

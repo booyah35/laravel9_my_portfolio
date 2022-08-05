@@ -33,7 +33,11 @@
             <tbody>
                 <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
                     <th scope="row" class="px-2 py-4 font-medium text-gray-900 dark:text-white whitespace-nowrap">
-                        {{ $searched_event->name }}
+                        @if ($date > $searched_event->event_date)
+                            ＜募集終了＞{{ $searched_event->name }}
+                        @else
+                            {{ $searched_event->name }}
+                        @endif
                     </th>
                     <td class="px-2 py-4">
                         {{ $searched_event->sport->name }}

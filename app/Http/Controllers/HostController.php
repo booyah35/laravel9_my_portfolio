@@ -8,6 +8,8 @@ use App\Http\Requests\Auth\LoginRequest;
 use Illuminate\Support\Facades\Hash;
 use App\Providers\RouteServiceProvider;
 use Auth;
+use Carbon\Carbon;
+
 
 class HostController extends Controller
 {
@@ -124,15 +126,19 @@ class HostController extends Controller
     
     public function host_cfm_event(Sport $sport, Level $level, Event $event)
     {
-        return view('host/cfm_event')->with([
+        $date = Carbon::now();
+        return view('host/cfm_event', compact('date'))->with([
             'sports' => $sport->get(),
             'levels' => $level->get(),
-            'events' => Auth::guard('host')->user()->events()->orderBy('event_date', 'desc')->orderBy('start_time', 'desc')->get(),
+            'events' => Auth::guard('host')->user()->events()->orderBy('event_date', 'desc')->orderBy('start_time', 'desc')->paginate(10),
             ]);
     }
     public function detail_event(User $user, Event $event)
     {
-        return view('host/detail_event' , compact('event'));
+        $date = Carbon::now();
+        return view('host/detail_event' ,compact('event'), compact('date'))->with([
+            'users' => $event->users()->get(),
+            ]);
     }
     public function delete_event(Event $event)
     {
@@ -164,8 +170,9 @@ class HostController extends Controller
         if(!empty($event)) {
             $query->where('event_date', 'LIKE', $event);
         }
+        $date = Carbon::now();
         $searched_events = $query->orderBy('event_date', 'desc')->orderBy('start_time', 'desc')->paginate(15);
-        return view('host/host_sch_rslt', compact('searched_events'));
+        return view('host/host_sch_rslt', compact('searched_events'), compact('date'));
     }
     public function host_show_profile(Host $host)
     {
@@ -189,4 +196,19 @@ class HostController extends Controller
         $host->fill($host_post)->save();
         return view('host/host_update_profile');
     }
+    public function index_follower(User $user)
+    {
+        return view('host/index_follower')->with([
+            'users' => Auth::guard('host')->user()->users()->get(),
+            ]);
+    }
+    public function show_user_profile(User $user)
+    {
+        return view('host/show_user_profile' , compact('user'));
+    }
+    public function show_other_host_profile(Host $host)
+    {
+        return view('host/show_other_host_profile' , compact('host'));
+    }
+    
 }

@@ -24,7 +24,10 @@ class Host extends Authenticatable
     {
         return $this->hasMany(Review::class);	 	 
     }
-    
+    public function users()
+    {
+        return $this->belongsToMany(User::class);
+    }
     protected $fillable = [
         'name',
         'email',

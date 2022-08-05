@@ -32,7 +32,11 @@
         <tbody>
             <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
                 <th scope="row" class="px-2 py-4 font-medium text-gray-900 dark:text-white whitespace-nowrap">
-                    {{ $event->name }}
+                    @if ($date > $event->event_date)
+                        ＜終了＞{{ $event->name }}
+                    @else
+                        {{ $event->name }}
+                    @endif
                 </th>
                 <td class="px-2 py-4">
                     {{ $event->sport->name }}
@@ -56,4 +60,5 @@
         </tbody>
         @endforeach
     </table>
+    {{ $events->appends(request()->query())->links() }}
 </x-app-layout>

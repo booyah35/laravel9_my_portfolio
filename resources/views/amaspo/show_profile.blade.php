@@ -7,6 +7,11 @@
            <img class="mb-3 w-48 h-48 rounded-full shadow-lg" src="{{ Storage::url(Auth::user()->profile_image) }}" alt="プロフィール画像">
         @endif
     </div>
+    <div class="flex justify-center pt-2">
+        <button class="content-center text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-full text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700">
+            <a href="/index_follow_host">フォローリストを確認する</a>
+        </button>    
+    </div>
     <div class="flex justify-center pt-3">
         <table class="bg-red-100 border-separate border-2 border-gray-500 w-3/5 rounded-md">
             <tr><th class="w-2/6 border border-gray-400 py-2">項目</th><th class="w-4/6 border border-gray-400">内容</th></tr>

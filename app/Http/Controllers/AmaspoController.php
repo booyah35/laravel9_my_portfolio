@@ -21,7 +21,7 @@ class AmaspoController extends Controller
         return view('amaspo/sch_event')->with([
             'sports' => $sport->get(),
             'levels' => $level->get(),
-            'events' => $event->orderBy('event_date', 'desc')->get(),
+            'events' => $event->get(),
             ]);
     }
     
@@ -29,28 +29,31 @@ class AmaspoController extends Controller
     {
         // dd($request);
         //検索フォームに入力された値を取得
-        $sport = $request->input('sport');
-        $level = $request->input('level');
-        $event = $request->input('event_date');
+        $rslt_sport = $request->input('sport');
+        $rslt_level = $request->input('level');
+        $rslt_event_date = $request->input('event_date');
         
 
         $query = Event::query();
         
-        if(!empty($sport)) {
-            $query->where('sport_id', $sport);
+        if(!empty($rslt_sport)) {
+            $query->where('sport_id', $rslt_sport);
         }
 
-        if(!empty($level)) {
-            $query->where('level_id', $level);
+        if(!empty($rslt_level)) {
+            $query->where('level_id', $rslt_level);
         }
 
-        if(!empty($event)) {
-            $query->where('event_date', 'LIKE', $event);
+        if(!empty($rslt_event_date)) {
+            $query->where('event_date', 'LIKE', $rslt_event_date);
         }
-        // $query = Event::paginate(10);
-        $searched_events = $query->orderBy('event_date', 'desc')->orderBy('start_time', 'desc')->paginate(15);
         
-        return view('amaspo/sch_rslt', compact('searched_events'));
+        $searched_events = $query->orderBy('event_date', 'desc')->orderBy('start_time', 'desc')->paginate(15);
+        return view('amaspo/sch_rslt', compact('searched_events'))->with([
+            'sports' => $sport->get(),
+            'levels' => $level->get(),
+            // 'events' => $event->get(),
+            ]);
     }
     
     public function detail_event(User $user, Event $event)
@@ -101,7 +104,8 @@ class AmaspoController extends Controller
             'evaluation' => ['required'],
             'comments' => ['required', 'string', 'max:800'],
         ]);
-        // dd($request);
+        dd($request);
+        $review->host_id=$request->host_=
         $review->user_id=Auth::guard('web')->user()->id;
         $review->fill($request->input())->save();
         return view('amaspo/fnsh_review');

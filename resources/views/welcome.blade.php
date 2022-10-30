@@ -5,7 +5,7 @@
             <h4 class="">さあ、気軽にスポーツを楽しもう！</h4>
         </div>
     </div>
-    <div>
-        <h4 class="text-center">アマスポにできること</h4>
-    </div>
+    <!--<div>-->
+    <!--    <h4 class="text-center">アマスポにできること</h4>-->
+    <!--</div>-->
 </x-guest-layout>

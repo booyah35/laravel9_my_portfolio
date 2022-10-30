@@ -22,13 +22,25 @@
                 <tr>
                     <th class="border border-gray-600 py-2">ホストを選択</th>
                     <td class="border border-gray-600"><p class="text-center"></p>
-                        <div>
-                            <select name="host_id" data-toggle="select" required class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                        <div id="datalist">
+                            <input type="text" list="hosts" required class="w-full">
+                            <datalist id="hosts" class="hidden w-full">
                                 <option value="">選択する</option>
                                 @foreach ($hosts as $host)
-                                    <option value="{{ $host->id }}" @if($host=='{{ $host->name }}') selected @endif>{{ $host->name }}</option>
+                                    <option value="{{ $host->name }}" @if($host=='{{ $host->name }}') selected @endif>{{ $host->name }}</option>
                                 @endforeach
-                            </select>
+                            </datalist>
+                            
+                        	<!--<input id="datalist-input" type="text"　class="w-full" placeholder="ホスト名を入力してください">-->
+                        	<!--<i id="datalist-icon" class="icon iconfont icon-arrow"></i>-->
+                        	<!--<ul id="datalist-ul"></ul>-->
+                      
+                            <!--<select name="host_id" data-toggle="select" required class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">-->
+                            <!--    <option value="">選択する</option>-->
+                            <!--    @foreach ($hosts as $host)-->
+                            <!--        <option value="{{ $host->id }}" @if($host=='{{ $host->name }}') selected @endif>{{ $host->name }}</option>-->
+                            <!--    @endforeach-->
+                            <!--</select>-->
                         </div>
                     </td>
                 </tr>

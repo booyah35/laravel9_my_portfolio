@@ -17,7 +17,7 @@ class CreateHostsTable extends Migration
             $table->bigIncrements('id');
             $table->string('name', 40);
             $table->string('email')->unique();
-            $table->timestamp('email_verified_at');
+            $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();
             $table->string('hometown', 20);

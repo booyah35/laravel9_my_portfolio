@@ -16,7 +16,7 @@ class CreateHostsTable extends Migration
         Schema::create('hosts', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('name', 40);
-            $table->string('email')->unique('email');
+            $table->string('email')->unique();
             $table->timestamp('email_verified_at');
             $table->string('password');
             $table->rememberToken();

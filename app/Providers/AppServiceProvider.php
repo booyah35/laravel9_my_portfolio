@@ -27,7 +27,7 @@ class AppServiceProvider extends ServiceProvider
     public function boot(UrlGenerator $url)
     {
         $url->forceScheme('https');
-        view()->share('sports', Sport::all());
-        view()->share('users', User::all());
+        // view()->share('sports', Sport::all());
+        // view()->share('users', User::all());
     }
 }
